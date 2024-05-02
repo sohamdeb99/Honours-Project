@@ -1,7 +1,8 @@
 [build]
-  base = "/"
-  publish = "dist/"
-  command = "npm run build"
+base = "/"
+publish = "dist/"  # This should match your local output directory
+command = "npm run build-your-script"
+
 
 [[redirects]]
 from = "/*"
