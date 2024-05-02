@@ -1,7 +1,8 @@
+const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-  entry: './project/src/index.js', // Adjust if your entry point is different
+  entry: './project/src/index.js',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
@@ -9,20 +10,27 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/, // This rule will handle all CSS files
-        use: ['style-loader', 'css-loader'] // Use these loaders for CSS files
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
       },
       {
-        test: /\.js$/, // Rule for JavaScript files
-        exclude: /node_modules/, // Exclude the node_modules directory
+        test: /\.js$/,
+        exclude: /node_modules/,
         use: {
-          loader: 'babel-loader', // Use babel-loader for JavaScript files
+          loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'] // Ensure you include react preset if using JSX
+            presets: ['@babel/preset-env', '@babel/preset-react']
           }
         }
       },
-      // Include other rules or loaders if necessary
+      // other rules
     ]
-  }
+  },
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        { from: 'project/public', to: 'dist' }  // Adjust according to your paths
+      ],
+    }),
+  ]
 };
